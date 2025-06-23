@@ -10,6 +10,8 @@ builder.Services.AddDbContext<AuthenticationDbContext>(o =>o.UseSqlServer(builde
 // Register Services
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
+builder.Services.AddScoped<IProductService, ProductService>();
+
 builder.Services.AddAuthentication("CustomLogin").AddCookie("CustomLogin", o => {
     o.LoginPath = @"/Authentication/Login";
     o.LogoutPath = @"/Authentication/Logout";

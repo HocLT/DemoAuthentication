@@ -10,5 +10,7 @@ namespace DemoAuthentication.Data
         }
 
         public DbSet<Account> Accounts { get; set; }
+
+        public DbSet<Product> Products { get; set; }
     }
 }
