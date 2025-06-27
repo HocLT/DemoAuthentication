@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using DemoAuthentication.Models;
+using DemoAuthentication.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,14 +10,19 @@ namespace DemoAuthentication.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        readonly IProductService productService;
+
+        public HomeController(ILogger<HomeController> logger, IProductService productService)
         {
             _logger = logger;
+            this.productService = productService;
         }
 
         
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var products = await productService.GetProducts();
+            ViewBag.TopProducts = products.Take(10);
             return View();
         }
 

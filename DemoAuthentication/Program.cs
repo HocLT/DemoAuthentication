@@ -1,4 +1,5 @@
 using DemoAuthentication.Data;
+using DemoAuthentication.Profiles;
 using DemoAuthentication.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,7 +23,22 @@ builder.Services.AddAuthorization();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// register profile
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
+// register session
+builder.Services.AddSession(o =>
+{
+    o.IdleTimeout = TimeSpan.FromSeconds(20);
+    o.Cookie.IsEssential = true;
+    o.Cookie.Name = "DemoAuthentication.WebApp";
+    o.Cookie.SameSite = SameSiteMode.Lax;
+    o.Cookie.HttpOnly = true;
+});
+
 var app = builder.Build();
+
+app.UseSession();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
