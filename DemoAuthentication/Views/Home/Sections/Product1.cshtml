@@ -32,9 +32,9 @@
                             <article class="col single_product">
                                 <figure>
                                     <div class="product_thumb">
-                                        <a href="product-details.html">
-                                            <img class="primary_img" src="assets/img/product/product1.jpg"
-                                            alt="consectetur">
+                                        <a asp-action="ProductDetails" asp-route-id="@item.Id">
+                                            <img class="primary_img" src="/images/@item.Image"
+                                            alt="@item.Name">
                                         </a>
                                         <div class="product_action">
                                             <ul>
@@ -77,15 +77,18 @@
                                             </ul>
                                         </div>
                                         <h4 class="product_name">
-                                            <a href="product-details.html">Basic Joggin Shorts</a>
+                                            <a asp-action="ProductDetails" asp-route-id="@item.Id">@item.Name</a>
                                         </h4>
                                         <div class="price_box">
-                                            <span class="current_price">$26.00</span>
-                                            <span class="old_price">$62.00</span>
+                                            <span class="current_price">@item.Price đ</span>
+                                            @* <span class="old_price">$62.00</span> *@
                                         </div>
                                         <div class="add_to_cart">
-                                            <a class="btn btn-primary" href="#" data-tippy="Add To Cart"
-                                            data-tippy-inertia="true" data-tippy-delay="50" data-tippy-arrow="true"
+                                            <a class="btn btn-primary" 
+                                            asp-action="AddCart" asp-route-id="@item.Id"
+                                            data-tippy="Add To Cart"
+                                            data-tippy-inertia="true" data-tippy-delay="50" 
+                                            data-tippy-arrow="true"
                                             data-tippy-placement="top">Add To Cart</a>
                                         </div>
                                     </figcaption>

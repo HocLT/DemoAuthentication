@@ -56,6 +56,11 @@
                             <!--begin::Body-->
                             <div class="card-body">
                                 <div class="mb-3">
+                                    <label asp-for="Sku" class="form-label"></label>
+                                    <input asp-for="Sku" class="form-control">
+                                    <span asp-validation-for="Sku"></span>
+                                </div>
+                                <div class="mb-3">
                                     <label asp-for="Name" class="form-label"></label>
                                     <input asp-for="Name" class="form-control">
                                     <span asp-validation-for="Name"></span>
@@ -64,6 +69,11 @@
                                     <label asp-for="Price" class="form-label"></label>
                                     <input asp-for="Price" class="form-control">
                                     <span asp-validation-for="Price"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <label asp-for="Quantity" class="form-label"></label>
+                                    <input asp-for="Quantity" class="form-control">
+                                    <span asp-validation-for="Quantity"></span>
                                 </div>
                                 <div class="mb-3">
                                     <label asp-for="Description" class="form-label"></label>
@@ -75,6 +85,17 @@
                                     <label class="input-group-text" asp-for="Photo"></label>
                                     <span asp-validation-for="Photo"></span>
                                 </div>
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text" asp-for="CategoryId"></label>
+                                    <select asp-for="CategoryId" class="form-select">
+                                        @foreach(var item in ViewBag.cates)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="CategoryId"></span>
+                                </div>
+
                             </div>
                             <!--end::Body-->
                             <!--begin::Footer-->

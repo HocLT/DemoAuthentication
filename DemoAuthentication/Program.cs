@@ -2,6 +2,7 @@ using DemoAuthentication.Data;
 using DemoAuthentication.Profiles;
 using DemoAuthentication.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ builder.Services.AddDbContext<AuthenticationDbContext>(o =>o.UseSqlServer(builde
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 builder.Services.AddAuthentication("CustomLogin").AddCookie("CustomLogin", o => {
     o.LoginPath = @"/Authentication/Login";
@@ -35,6 +38,8 @@ builder.Services.AddSession(o =>
     o.Cookie.SameSite = SameSiteMode.Lax;
     o.Cookie.HttpOnly = true;
 });
+
+builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();
 
